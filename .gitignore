@@ -1,0 +1,9 @@
+/py_env
+.env
+example_process.pdf
+example_process.zip
+notebook.*
+!notebook.ipynb
+
+.idea
+*.iml

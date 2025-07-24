@@ -1,0 +1,35 @@
+name: Publish Jupyter Notebook to GitHub Pages
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.x"
+
+      - name: Install Jupyter
+        run: pip install notebook nbconvert pandoc requests dotenv
+
+      - name: Convert Notebook to HTML
+        run: |
+          jupyter nbconvert --to html notebook.ipynb --output index.html
+
+      - name: Deploy to GitHub Pages
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          branch: gh-pages
+          folder: .
+          target-folder: .
+          clean: true
+          token: ${{ secrets.GH_PAGES_DEPLOY }}
