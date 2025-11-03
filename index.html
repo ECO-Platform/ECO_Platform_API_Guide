@@ -7517,17 +7517,9 @@ a.anchor-link {
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="Motivation">Motivation<a class="anchor-link" href="#Motivation">¶</a></h2><p>The <strong>ECO Platform API</strong> helps developers access high-quality and standardized Environmental Product Declaration (EPD) data easily.
-As the construction industry shifts toward <strong>low-carbon solutions and resource efficiency</strong>, having reliable and scientifically verified data is crucial for <strong>life cycle assessment (LCA) modeling, making sustainable choices, and meeting regulations</strong>.</p>
-<p>ECO Platform connects EPD program operators, manufacturers, and sustainability experts to provide <strong>consistent, trustworthy, and clear environmental data</strong>. This API integrates smoothly into your <strong>LCA processes</strong>, allowing for automation, data analysis, and new sustainability applications.</p>
-<p>By using the ECO Platform API, you can:</p>
-<ul>
-<li><strong>Access standardized EPD data</strong> for precise environmental impact evaluations.</li>
-<li><strong>Automate LCA calculations</strong> and connect with current sustainability tools.</li>
-<li><strong>Ensure compliance</strong> with global sustainability standards.</li>
-<li><strong>Increase transparency</strong> in construction and green building projects.</li>
-</ul>
-<p>This documentation will help you with <strong>authenticating, retrieving, and processing EPD data</strong>, providing real examples to assist you in efficiently integrating the API into your workflows.</p>
+<h2 id="Note:"><strong>Note:</strong><a class="anchor-link" href="#Note:">¶</a></h2><p>The new ECO Portal is available at <a href="https://portal.eco-platform.org">https://portal.eco-platform.org</a> and requires different steps to obtain an API access token than before.</p>
+<p>The legacy ECO Portal at <a href="https://data.eco-platform.org">https://data.eco-platform.org</a> has been decommissioned as of November 3rd, 2025.</p>
+<p>The API is identical for both versions.</p>
 </div>
 </div>
 </div>
@@ -7591,12 +7583,12 @@ or product variant.</p>
 </ul>
 <h4 id="Constructing-the-URL">Constructing the URL<a class="anchor-link" href="#Constructing-the-URL">¶</a></h4><p>Using these parameters, the request URL looks like this:</p>
 <pre><code class="language-url">url
-https://data.eco-platform.org/resource/processes?search=true&amp;distributed=true&amp;virtual=true&amp;metaDataOnly=false&amp;validUntil=2025&amp;pageSize=5&amp;startIndex=0&amp;format=JSON
+https://portal.eco-platform.org/resource/processes?search=true&amp;distributed=true&amp;virtual=true&amp;metaDataOnly=false&amp;validUntil=2025&amp;pageSize=5&amp;startIndex=0&amp;format=JSON
 </code></pre>
 <p>then copy the URL to the browser and see if it works!</p>
 <p>Some free Environmental Product Declarations (EPDs) can be viewed without registration. However, to access the full set of capabilities that the ECO Platform has to offer, you must register and obtain an <strong>Authorization token</strong>.</p>
 <h3 id="Making-a-Request-with-curl">Making a Request with <code>curl</code><a class="anchor-link" href="#Making-a-Request-with-curl">¶</a></h3><p>You can retrieve the data using <code>curl</code>:</p>
-<div class="highlight"><pre><span></span>curl<span class="w"> </span><span class="s2">"https://data.eco-platform.org/resource/processes?search=true&amp;distributed=true&amp;virtual=true&amp;metaDataOnly=false&amp;validUntil=2025&amp;pageSize=5&amp;startIndex=0&amp;format=JSON"</span>
+<div class="highlight"><pre><span></span>curl<span class="w"> </span><span class="s2">"https://portal.eco-platform.org/resource/processes?search=true&amp;distributed=true&amp;virtual=true&amp;metaDataOnly=false&amp;validUntil=2025&amp;pageSize=5&amp;startIndex=0&amp;format=JSON"</span>
 </pre></div>
 <p>If the request is successful, the output will display the retrieved data.</p>
 <h4 id="Adding-an-Authorization-Token">Adding an Authorization Token<a class="anchor-link" href="#Adding-an-Authorization-Token">¶</a></h4><p>To access restricted resources, you need to include an <strong>Authorization token</strong>. We recommend storing it in an <code>.env</code> file or saving it securely.</p>
@@ -7613,7 +7605,7 @@ echo %TOKEN%
 </pre></div>
 <p>If you don't see your token, replace <code>$TOKEN</code> in the following command with your actual token.</p>
 <p><strong>Making an Authorized Request</strong></p>
-<div class="highlight"><pre><span></span>curl<span class="w"> </span>-H<span class="w"> </span><span class="s2">"Authorization: Bearer </span><span class="nv">$TOKEN</span><span class="s2">"</span><span class="w"> </span><span class="s2">"https://data.eco-platform.org/resource/processes?search=true&amp;distributed=true&amp;virtual=true&amp;metaDataOnly=false&amp;validUntil=2025&amp;pageSize=5&amp;startIndex=0&amp;format=JSON"</span>
+<div class="highlight"><pre><span></span>curl<span class="w"> </span>-H<span class="w"> </span><span class="s2">"Authorization: Bearer </span><span class="nv">$TOKEN</span><span class="s2">"</span><span class="w"> </span><span class="s2">"https://portal.eco-platform.org/resource/processes?search=true&amp;distributed=true&amp;virtual=true&amp;metaDataOnly=false&amp;validUntil=2025&amp;pageSize=5&amp;startIndex=0&amp;format=JSON"</span>
 </pre></div>
 <p>This should return the same output but now includes access to restricted resources.</p>
 <h3 id="Making-the-Request-in-Python">Making the Request in Python<a class="anchor-link" href="#Making-the-Request-in-Python">¶</a></h3><p>Let's see how to perform the same request using Python.</p>
@@ -7732,7 +7724,7 @@ Requirement already satisfied: python-dotenv in ./py_env/lib/python3.12/site-pac
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="c1"># Base URL form the ECO Platform</span>
-<span class="n">BASE_URL</span> <span class="o">=</span> <span class="s1">'https://data.eco-platform.org/resource/'</span>
+<span class="n">BASE_URL</span> <span class="o">=</span> <span class="s1">'https://portal.eco-platform.org/resource/'</span>
 
 <span class="c1"># Endpoint for processes</span>
 <span class="n">PROCESS_ENDPOINT</span> <span class="o">=</span> <span class="s1">'processes'</span>
@@ -7947,7 +7939,7 @@ Requirement already satisfied: python-dotenv in ./py_env/lib/python3.12/site-pac
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="c1"># Base URL for the ECO Platform data aggregator</span>
-<span class="n">BASE_URL</span> <span class="o">=</span> <span class="s1">'https://data.eco-platform.org/resource/'</span>
+<span class="n">BASE_URL</span> <span class="o">=</span> <span class="s1">'https://portal.eco-platform.org/resource/'</span>
 
 <span class="c1"># API endpoint for fetching EPD datasets</span>
 <span class="n">PROCESS_ENDPOINT</span> <span class="o">=</span> <span class="s1">'processes'</span>
@@ -8247,7 +8239,7 @@ Total GWP: 166.2 kg CO_(2) eqv.
            <span class="k">break</span> 
 
 <span class="c1"># Fetch flow properties lookup table</span>
-<span class="n">flow_properties_url</span> <span class="o">=</span> <span class="s2">"https://data.eco-platform.org/resource/flowproperties"</span>
+<span class="n">flow_properties_url</span> <span class="o">=</span> <span class="s2">"https://portal.eco-platform.org/resource/flowproperties"</span>
 <span class="n">flow_properties_response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">flow_properties_url</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="p">{</span><span class="s1">'format'</span><span class="p">:</span> <span class="s1">'JSON'</span><span class="p">})</span>
 <span class="n">flow_properties_lookup</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">flow_properties_response</span><span class="o">.</span><span class="n">json</span><span class="p">()[</span><span class="s2">"data"</span><span class="p">])</span>
 
@@ -8354,7 +8346,7 @@ Has a GWP of:
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="c1"># Base URL form the ECO Platform</span>
-<span class="n">BASE_URL</span> <span class="o">=</span> <span class="s1">'https://data.eco-platform.org/resource/'</span>
+<span class="n">BASE_URL</span> <span class="o">=</span> <span class="s1">'https://portal.eco-platform.org/resource/'</span>
 
 <span class="c1"># Endpoint for processes</span>
 <span class="n">PROCESS_ENDPOINT</span> <span class="o">=</span> <span class="s1">'processes'</span>
@@ -9784,31 +9776,8 @@ Download complete.
 </pre></div>
 </li>
 </ol>
-<h3 id="Getting-API-Key">Getting API Key<a class="anchor-link" href="#Getting-API-Key">¶</a></h3><p>To get started, you'll need an access token. Follow these steps:</p>
-<ol>
-<li><p><strong>Register for an API Key:</strong></p>
-<ul>
-<li>Go to the <a href="https://data.eco-platform.org/registration.xhtml">registration page</a>.</li>
-<li>Complete the registration process if you haven’t already.</li>
-</ul>
-</li>
-<li><p><strong>Generate Your Token:</strong></p>
-<ul>
-<li>Scroll to the bottom of the page and click on <strong><code>My Profile</code></strong>.</li>
-<li>Navigate to the <strong><code>API Key</code></strong> section.</li>
-<li>Generate a new API key and copy it.</li>
-</ul>
-</li>
-<li><p><strong>Save the Token:</strong></p>
-<ul>
-<li>Create a <code>.env</code> file in your project folder.</li>
-<li>Add the token to the file with the variable name <code>TOKEN</code>. The <code>.env</code> file should look something like this:<pre><code class="language-plaintext">plaintext
-TOKEN=iY291bnRyeSI6IkR...aWFz
-</code></pre>
-</li>
-</ul>
-</li>
-</ol>
+<h3 id="Getting-your-API-Key">Getting your API Key<a class="anchor-link" href="#Getting-your-API-Key">¶</a></h3><p>To get started, you'll need an access token.</p>
+<h4 id="Using-the-New-ECO-Portal-at-https://portal.eco-platform.org/">Using the New ECO Portal at <a href="https://portal.eco-platform.org/">https://portal.eco-platform.org/</a><a class="anchor-link" href="#Using-the-New-ECO-Portal-at-https://portal.eco-platform.org/">¶</a></h4><p>Follow the guide here: <a href="https://github.com/ECO-Platform/ECO_Portal_M2M_Authentication_Guide/blob/main/README.md">https://github.com/ECO-Platform/ECO_Portal_M2M_Authentication_Guide/blob/main/README.md</a>.</p>
 <h3 id="License">License<a class="anchor-link" href="#License">¶</a></h3><p>This notebook is under the <a href="./LICENSE">MIT</a> license</p>
 </div>
 </div>
